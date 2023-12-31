@@ -1,0 +1,7 @@
+admin0 0
+admin1 2
+admin2 3
+admin3 1
+admin4 3
+admin5 0
+duyvinh 1
