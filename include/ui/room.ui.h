@@ -22,6 +22,8 @@ WINDOW *cancel_btn_room;
 WINDOW *pre_btn_room;
 WINDOW *next_btn_room;
 WINDOW *send_btn_room;
+WINDOW *logout_btn_room;
+
 int choose_num[4];
 int start;
 WINDOW *number_win[4];
@@ -85,8 +87,6 @@ void init_top_win_room()
     wrefresh(top_search_btn_room);
     wrefresh(top_win_room);
 
-    // mvwprintw(top_win_room, 2, 2, "%-40s", txt_cnt_signup[0]);
-    // mvwprintw(top_win_room, 3, 2, "%-40s", txt_cnt_signup[1]);
     mvwprintw(top_create_btn_room, 1, 2, "%-13s", "Create Room");
     mvwprintw(top_search_btn_room, 1, 2, "%-13s", "Search Room");
 
@@ -183,15 +183,14 @@ void switch_input_win_room()
         mvwprintw(input_win_room, 4, 10, "%-35s", "| |   | '__/ _ \\/ _` | __/ _ \\    |    // _ \\ / _ \\| '_ ` _ \\ ");
         mvwprintw(input_win_room, 5, 10, "%-35s", "| \\__/\\ | |  __/ (_| | ||  __/    | |\\ \\ (_) | (_) | | | | | |");
         mvwprintw(input_win_room, 6, 10, "%-35s", " \\____/_|  \\___|\\__,_|\\__\\___|    \\_| \\_\\___/ \\___/|_| |_| |_|");
-        // mvwprintw(input_win_room, 8, 10, "%-35s", "              |___/");
-        // mvwprintw(input_win_room, 16, 10, "%-35s", " \\____/_|  \\___|\\__,_|\\__\\___|    \\_| \\_\\___/ \\___/|_| |_| |_|");
+
         wattroff(input_win_room, COLOR_PAIR(12) | A_BOLD);
         submit_btn_room = subwindow(input_win_room, 3, 10, 28, 58);
-        cancel_btn_room = subwindow(input_win_room, 3, 10, 28, 14);
+        logout_btn_room = subwindow(input_win_room, 3, 10, 28, 14);
         input_string_room = subwindow(input_win_room, 3, 20, 12, 34);
         box(input_win_room, 0, 0);
         box(submit_btn_room, 0, 0);
-        box(cancel_btn_room, 0, 0);
+        box(logout_btn_room, 0, 0);
         wbkgd(input_string_room, A_BOLD | COLOR_PAIR(10));
         box(input_string_room, 0, 0);
         mvwprintw(input_win_room, 13, 24, "%-10s", "Room Name");
@@ -216,9 +215,9 @@ void switch_input_win_room()
         }
         wbkgd(submit_btn_room, COLOR_PAIR(10) | A_BOLD);
         mvwprintw(submit_btn_room, 1, 2, "%-7s", "Submit");
-        mvwprintw(cancel_btn_room, 1, 2, "%-7s", "Cancel");
+        mvwprintw(logout_btn_room, 1, 2, "%-7s", "Logout");
         wrefresh(submit_btn_room);
-        wrefresh(cancel_btn_room);
+        wrefresh(logout_btn_room);
         wrefresh(input_win_room);
     }
     else
@@ -271,6 +270,7 @@ WINDOW *get_target_win_room()
     // int pibx = getbegx(password_input), piby = getbegy(password_input), pibw = getmaxx(password_input), pibh = getmaxy(password_input);
     int cbbx = getbegx(submit_btn_room), cbby = getbegy(submit_btn_room), cbbw = getmaxx(submit_btn_room), cbbh = getmaxy(submit_btn_room);
     int cbbx2 = getbegx(cancel_btn_room), cbby2 = getbegy(cancel_btn_room), cbbw2 = getmaxx(cancel_btn_room), cbbh2 = getmaxy(cancel_btn_room);
+    int lbbx = getbegx(logout_btn_room), lbby = getbegy(logout_btn_room), lbbw = getmaxx(logout_btn_room), lbbh = getmaxy(logout_btn_room);
     int pbbx = getbegx(pre_btn_room), pbby = getbegy(pre_btn_room), pbbw = getmaxx(pre_btn_room), pbbh = getmaxy(pre_btn_room);
     int nbbx = getbegx(next_btn_room), nbby = getbegy(next_btn_room), nbbw = getmaxx(next_btn_room), nbbh = getmaxy(next_btn_room);
     int mx = m_event.x, my = m_event.y;
@@ -291,9 +291,13 @@ WINDOW *get_target_win_room()
     {
         return submit_btn_room;
     }
-    if (mx >= cbbx2 && mx <= cbbx2 + cbbw2 && my >= cbby2 && my <= cbby2 + cbbh2)
+    if (mx >= cbbx2 && mx <= cbbx2 + cbbw2 && my >= cbby2 && my <= cbby2 + cbbh2 && !is_create)
     {
         return cancel_btn_room;
+    }
+    if (mx >= cbbx2 && mx <= cbbx2 + cbbw2 && my >= cbby2 && my <= cbby2 + cbbh2)
+    {
+        return logout_btn_room;
     }
     if (!is_create && mx >= pbbx && mx <= pbbx + pbbw && my >= pbby && my <= pbby + pbbh)
     {
@@ -312,6 +316,7 @@ void del_room()
     // delwin(password_input);
     delwin(submit_btn_room);
     delwin(cancel_btn_room);
+    delwin(logout_btn_room);
     // delwin(input_win_room);
     delwin(top_create_btn_room);
     delwin(top_search_btn_room);
@@ -399,7 +404,7 @@ void listen_mouse_event_room(void)
                 napms(150);
                 init_room(username);
             }
-            else if (target == cancel_btn_room)
+            else if (target == logout_btn_room)
             {
                 // del_room();
                 napms(150);
@@ -426,6 +431,12 @@ void listen_mouse_event_room(void)
                     current_page_room++;
                     print_list_room();
                 }
+            }
+            else if (target == cancel_btn_room)
+            {
+                is_create = 1;
+                // switch_top_win_room();
+                switch_input_win_room();
             }
         }
     }
