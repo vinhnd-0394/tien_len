@@ -1,6 +1,6 @@
 #if !defined(UI_LOGIN_H_)
 #define UI_LOGIN_H_
-#include <curses.h>
+#include <ncurses.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>

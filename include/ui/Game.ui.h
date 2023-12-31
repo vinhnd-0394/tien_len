@@ -1,6 +1,6 @@
 #if !defined(GAME_UI_TEST_H)
 #define GAME_UI_TEST_H
-#include <curses.h>
+#include <ncurses.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>

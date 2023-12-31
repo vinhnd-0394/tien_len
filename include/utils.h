@@ -3,7 +3,7 @@
 #include "index.h"
 #include <ctype.h>
 #include <string.h>
-#include <curses.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <time.h>
 

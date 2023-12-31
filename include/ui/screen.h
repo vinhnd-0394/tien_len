@@ -1,6 +1,6 @@
 #ifndef SCREEN_H_
 #define SCREEN_H_
-#include <curses.h>
+#include <ncurses.h>
 #include <stdbool.h>
 #include <string.h>
 #include "init.h"

@@ -1,6 +1,6 @@
 #ifndef UI_ROOM_H_
 #define UI_ROOM_H_
-#include <curses.h>
+#include <ncurses.h>
 #include <stdbool.h>
 #include <string.h>
 #include "screen.h"

@@ -1,6 +1,6 @@
 #ifndef INIT_H_
 #define INIT_H_
-#include <curses.h>
+#include <ncurses.h>
 #include <stdbool.h>
 #include <string.h>
 #include <locale.h>
