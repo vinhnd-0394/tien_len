@@ -6,8 +6,6 @@
 #include "screen.h"
 #include "Game.ui.h"
 #include "room.h"
-// const char txt_cnt_signup[2][100] = {"Don't have an account?", "Sign up to play with us."};
-// const char txt_cnt_login[2][100] = {"Have an account?", "Login and play now."};
 // global variables
 WINDOW *main_win_room;
 WINDOW *top_win_room;

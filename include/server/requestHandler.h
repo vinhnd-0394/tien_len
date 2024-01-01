@@ -37,7 +37,7 @@ void loginHandler(int sockfd, Req req)
     }
     if (getSessionByUser(req.data.login.username))
     {
-        res = createRResponse(false, "このアカウントは既にログインしています");
+        res = createRResponse(false, "User is already in use");
         goto done;
     }
 
@@ -77,16 +77,15 @@ void signupHandler(int sockfd, Req req)
         res = createRResponse(false, "User already exists");
         goto done;
     }
-    user = newUser(req.data.signup.username, req.data.signup.password, idle);
+    user = newUser(req.data.signup.username, req.data.signup.password, idle, randActivationCode());
     addUser(userList, user);
-    res = createRResponse(true, "Signup successfully, activate code: 20194658");
-    // res = (Res){
-    //     .type = R_RES,
-    //     .data.resR = {
-    //         .success = true,
-    //         .message = "Signup successfully",
-    //     },
-    // };
+    char message[127] = "";
+    strcat(message,"Signup successfully, activate code:");
+    strcat(message,user->activationCode);
+
+
+    res = createRResponse(true, message);
+
 done:
     sendResponse(sockfd, res);
     exportList(userList, "users.txt");

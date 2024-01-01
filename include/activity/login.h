@@ -1,8 +1,3 @@
-// void f(void (*f1)(), void (*f2)())
-// {
-//     f1();
-//     f2();
-// }
 
 #if !defined(ACTIVITY_LOGIN_H_)
 #define ACTIVITY_LOGIN_H_

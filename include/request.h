@@ -184,10 +184,7 @@ int sendRequest(int sockfd, Req request)
 {
     return send(sockfd, &request, sizeof(Req), 0);
 }
-/// @brief
-/// @param sockfd
-/// @param request
-/// @return bytes received, 0 if disconnected, -1 if error
+
 int recvRequest(int sockfd, Req *request)
 {
     return recv(sockfd, request, sizeof(Req), 0);

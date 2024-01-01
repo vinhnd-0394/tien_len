@@ -10,6 +10,7 @@
 #include "jrb.h"
 #include "jval.h"
 #include "queue.h"
+#include "utils.h"
 #define ACTIVATION_CODE "20194658"
 typedef enum status
 {
@@ -23,9 +24,10 @@ typedef struct _User
     char password[127];
     Status status;
     char errCount;
+    char activationCode[127];
 } *User;
 
-User newUser(char *username, char *password, Status status);
+User newUser(char *username, char *password, Status status, char *activationCode);
 void blockUser(User user);
 void activeUser(User user);
 void setPassword(User user, char *password);
@@ -45,13 +47,14 @@ User verify(Dllist list, char *username, char *password);
 int checkPassword(User user, char *password);
 int updatePassword(User user, char *password);
 
-User newUser(char *username, char *password, Status status)
+User newUser(char *username, char *password, Status status, char *activationCode)
 {
     User user = (User)malloc(sizeof(struct _User));
     strcpy(user->username, username);
     strcpy(user->password, password);
     user->status = status;
     user->errCount = status == blocked ? 3 : 0;
+    strcpy(user->activationCode, activationCode);
     return user;
 }
 void blockUser(User user)
@@ -94,7 +97,7 @@ Dllist makeUsersList(char *filename)
     }
     while (get_line(is) >= 0)
     {
-        dll_append(list, new_jval_v(newUser(is->fields[0], is->fields[1], (Status)atoi(is->fields[2]))));
+        dll_append(list, new_jval_v(newUser(is->fields[0], is->fields[1], (Status)atoi(is->fields[2]), is->fields[3])));
     }
     jettison_inputstruct(is);
     return list;
@@ -126,7 +129,7 @@ void exportList(Dllist list, char *filename)
     {
         User user = (User)jval_v(dll_val(temp));
         // printf("User: %s %s %d\n", user->username, user->password, user->status);
-        fprintf(fout, "%s %s %d", user->username, user->password, user->status);
+        fprintf(fout, "%s %s %d %s", user->username, user->password, user->status, user->activationCode);
         fprintf(fErrCount, "%s %d", user->username, user->errCount);
         if (temp != dll_last(list))
         {
@@ -149,7 +152,7 @@ void freeUserList(Dllist list)
 }
 int activate(User user, char *activationCode)
 {
-    if (strcmp(activationCode, ACTIVATION_CODE) != 0)
+    if (strcmp(activationCode, user->activationCode) != 0)
     {
         return 0;
     }
