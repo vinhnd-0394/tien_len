@@ -4,16 +4,7 @@
 #include "index.h"
 int parentfd = -1; /* parent socket */
 int clientfd = -1; /* child socket */
-// void test()
-// {
-//     sizeof(Req);
-//     sizeof(ReqT);
-//     sizeof(Res);
-//     sizeof(CLUB);
-//     sizeof(ReqD);
-//     Req req;
-//     sizeof(req.data.play.cards);
-// }
+
 
 /// @brief Create a new socket for server
 /// @param PORT int

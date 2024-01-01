@@ -92,6 +92,8 @@ void init_input_win_login(void)
     wrefresh(input_win_login);
     switch_input_win_login();
 }
+
+// 
 void switch_top_win_login(void)
 {
     wattron(top_win_login, A_BOLD | COLOR_PAIR(11));
@@ -113,6 +115,8 @@ void switch_top_win_login(void)
     wrefresh(top_btn_login);
     wrefresh(top_win_login);
 }
+
+
 void switch_input_win_login(void)
 {
     wattron(input_win_login, A_BOLD | COLOR_PAIR(10));
@@ -238,11 +242,9 @@ void del_login(void)
     delwin(input_win_login);
     delwin(top_btn_login);
     delwin(top_win_login);
-    // delwin(main_win_login);
     clear();
     touchwin(main_win_login);
     refresh();
-    // endwin();
 }
 
 void listen_mouse_event_login(void)

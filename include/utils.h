@@ -9,6 +9,12 @@
 
 bool validateUsername(char *username, char *message);
 bool validatePassword(char *password, char *message);
+bool validateActivationCode(char *activationCode, char *message);
+bool validateRoomName(char *roomName, char *message);
+bool validateMaxPlayer(int maxPlayer, char *message);
+bool isExist(int *arr, int index, int value);
+void randArray(int begin, int end, int *arr, int arrSize);
+void sortArray(int *arr, int arrSize);
 
 bool validateUsername(char *username, char *message)
 {
@@ -71,6 +77,23 @@ bool validateActivationCode(char *activationCode, char *message)
         }
     }
     return true;
+}
+char *randActivationCode()
+{
+    srand(time(NULL));
+    int distance = 99999999 - 10000000 + 1;
+    int randActCode = rand() % distance + 10000000;
+    char *str_randActCode = (char *)malloc(128);
+    if (str_randActCode != NULL)
+    {
+        sprintf(str_randActCode, "%d", randActCode);
+        return str_randActCode;
+    }
+    else
+    {
+        printf("Memory allocation failed.\n");
+        return NULL;
+    }
 }
 bool validateRoomName(char *roomName, char *message)
 {
