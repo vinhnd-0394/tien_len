@@ -61,6 +61,7 @@ bool validatePassword(char *password, char *message)
     }
     return true;
 }
+
 bool validateActivationCode(char *activationCode, char *message)
 {
     if (strlen(activationCode) != 8)
@@ -109,6 +110,7 @@ bool validateRoomName(char *roomName, char *message)
     }
     return true;
 }
+
 bool validateMaxPlayer(int maxPlayer, char *message)
 {
     if (maxPlayer < 2)
@@ -123,6 +125,7 @@ bool validateMaxPlayer(int maxPlayer, char *message)
     }
     return true;
 }
+
 bool isExist(int *arr, int index, int value)
 {
     for (int i = 0; i < index; i++)

@@ -208,10 +208,10 @@ void joinRoomHandler(int sockfd, Req req)
         goto done;
     }
     Session session = getSessionBySockfd(sockfd);
-    for (int i = 0; i < room->curUser; i++)
-    {
-        // printf("before: %s: %d point\n", room->players[i].name, room->players[i].point);
-    }
+    // for (int i = 0; i < room->curUser; i++)
+    // {
+    //     printf("before: %s: %d point\n", room->players[i].name, room->players[i].point);
+    // }
     joinRoom(room, session);
     room->players[room->curUser - 1].point = getPoint(session->username);
     // for (int i = 0; i < room->curUser; i++)

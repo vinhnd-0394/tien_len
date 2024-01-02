@@ -4,4 +4,6 @@ admin2 3
 admin3 1
 admin4 3
 admin5 0
-duyvinh 1
+duyvinh 6
+thaingu 2
+duyvinh1 1

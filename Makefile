@@ -17,9 +17,9 @@ server: server.o
 server.o:
 	gcc $(FLAG) $(INCLUDE) -c $(SERVER.C)  -o $(SERVER.O)
 runsv:
-	clear && ./output/server 5501
+	clear && ./output/server 5500
 runcl:
-	clear && ./output/client 127.0.0.1 5501
+	clear && ./output/client 127.0.0.1 5500
 libj.a: file.o
 	gcc src/jval.o src/jrb.o src/dllist.o src/queue.o src/fields.o -shared -o lib/libj.a
 	@echo compiled libj.a success

@@ -150,6 +150,11 @@ bool isUserOnline(char *username)
 void exportSessions()
 {
     FILE *fp = fopen("session.txt", "w+");
+    if (fp == NULL)
+    {
+        printf("Error opening file!\n");
+        exit(1);
+    }
     Dllist ptr;
     dll_traverse(ptr, sessions)
     {

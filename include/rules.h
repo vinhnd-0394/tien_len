@@ -16,8 +16,8 @@ typedef enum bai_danh_xuong
 } BaiDanhXuong;
 typedef struct _cards
 {
-    BaiDanhXuong NameOfGroupCards;
-    int NumberOfGroupCards;
+    BaiDanhXuong NameOfGroupCards; // bài đánh xuống loại gì
+    int NumberOfGroupCards; // số bài đánh xuống
     Card cards[CARD_SIZE / MAX_PLAYER];
 } InforCards;
 int valueOfCard(Card card);
@@ -180,6 +180,7 @@ bool checkBonDoiThong(InforCards cards)
         return false;
     }
 
+    // check đôi
     for (int i = 0; i < 7; i += 2)
     {
         if (cards.cards[i].value != cards.cards[i + 1].value)
@@ -187,6 +188,8 @@ bool checkBonDoiThong(InforCards cards)
             return false;
         }
     }
+
+    // check liên tiếp
     for (int i = 1; i < 8; i += 2)
     {
         if (cards.cards[i].value != cards.cards[i + 1].value - 1)
@@ -245,74 +248,4 @@ bool checkValid(InforCards prev, InforCards cur)
     }
 }
 
-// bool checkValid(InforCards previous, InforCards present)
-// {
-//     if (previous.NameOfGroupCards == BaiLoi || present.NameOfGroupCards == BaiLoi)
-//     {
-//         return false;
-//     }
-
-//     // cùng bộ
-//     if (previous.NameOfGroupCards == present.NameOfGroupCards)
-//     {
-//         if (previous.NameOfGroupCards != Sanh)
-//         {
-//             // printf("cho nay\n");
-//             if (valueOfCard(previous.cards[previous.NumberOfGroupCards - 1]) < valueOfCard(present.cards[present.NumberOfGroupCards - 1]))
-//             {
-//                 return 1;
-//             }
-//             else
-//                 return 0;
-//         }
-//         else if (previous.NumberOfGroupCards > present.NumberOfGroupCards || valueOfCard(previous.cards[previous.NumberOfGroupCards - 1]) > valueOfCard(present.cards[present.NumberOfGroupCards - 1]) || previous.cards[0].value > present.cards[0].value)
-//         {
-//             return 0;
-//         }
-//         else
-//             return 1;
-//     }
-//     // khác bộ:
-//     if (previous.NameOfGroupCards == Don)
-//     {
-//         if (previous.cards[0].value == TWO) // neu la cay 2
-//         {
-//             if (present.NameOfGroupCards == BaDoiThong || present.NameOfGroupCards == BonDoiThong || present.NameOfGroupCards == TuQuy)
-//             {
-//                 return 1;
-//             }
-//             else
-//                 return 0;
-//         }
-//     }
-//     else if (previous.NameOfGroupCards == Doi)
-//     {
-//         if (previous.cards[0].value == TWO)
-//         {
-//             if (present.NameOfGroupCards == TuQuy || present.NameOfGroupCards == BonDoiThong)
-//             {
-//                 return 1;
-//             }
-//             else
-//                 return 0;
-//         }
-//         else if (previous.cards[0].value != TWO)
-//         {
-//             if (present.NameOfGroupCards == BonDoiThong)
-//             {
-//                 return 1;
-//             }
-//             else
-//                 return 0;
-//         }
-//     }
-//     else if (previous.NameOfGroupCards == BaDoiThong)
-//     {
-//         if (present.NameOfGroupCards == BonDoiThong)
-//         {
-//             return 1;
-//         }
-//     }
-//     return 0;
-// }
 #endif // _GAME_RULES_H_

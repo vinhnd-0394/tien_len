@@ -172,6 +172,7 @@ Room findRoomByUser(char *username)
 
 bool joinRoom(Room room, Session session)
 {
+    printf("current user in room: %d\n", room->curUser);
     if (room->curUser >= room->maxUser || room->isPlaying)
     {
         return false;
@@ -226,16 +227,18 @@ int getRoomCount()
 void exportRoom()
 {
     Dllist ptr;
-    FILE *f = fopen("rooms.txt", "w+");
+    FILE *f = fopen("rooms.txt", "a+");
     dll_traverse(ptr, rooms)
     {
         Room room = (Room)jval_v(ptr->val);
-        fprintf(f, "%d %s %d %d-> ", room->id, room->name, room->maxUser, room->curUser);
+        fprintf(f, "%s \t%s \t%s \t%s\n", "ID", "Room name", "Max", "curPlayer");
+        fprintf(f, "%d \t%s \t%d \t\t%d\n", room->id, room->name, room->maxUser, room->curUser);
+        fprintf(f, "%s \t%s \n", "Name", "Card in hand");
         for (int i = 0; i < room->curUser; i++)
         {
-            fprintf(f, "%s:%d ", room->users[i]->username, room->players[i].cardSize);
+            fprintf(f, "%s \t\t%d \n", room->users[i]->username, room->players[i].cardSize);
         }
-        fprintf(f, "%d %s\n", room->isPlaying, room->players[room->lastTurn].name);
+        fprintf(f, "------------------------\n");
     }
     fclose(f);
 }
