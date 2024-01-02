@@ -37,9 +37,7 @@ int room_list_size = 0;
 // implementation
 void init_room(char *);
 void init_top_win_room();
-// void init_chat_win_room();
 void listen_mouse_event_room();
-// void switch_top_win_room();
 WINDOW *get_target_win_room();
 void del_room();
 static void warning(const char *message);
@@ -148,10 +146,7 @@ void clearScr(WINDOW *org)
 void print_list_room()
 {
     mvwprintw(input_win_room, 9, 12, "%-5s %-15s %-15s %-8s %-10s", "ID", "Name", "Owner", "Player", "Status");
-    // for (int i = 10 * (current_page_room - 1); i < current_page_room * 10; i++)
-    // {
-    //     mvwprintw(input_win_room, 10 + i - 10 * (current_page_room - 1), 15, "%-4d %-10s %-20s %-10s", i, "Room 1", "Hoan", "2/4");
-    // }
+
     char str[10] = "    ";
     for (int i = 10 * (current_page_room - 1); i < current_page_room * 10; i++)
     {
@@ -239,7 +234,6 @@ void switch_input_win_room()
 
         wbkgd(input_string_room, A_BOLD | COLOR_PAIR(10));
         box(input_string_room, 0, 0);
-
         box(pre_btn_room, 0, 0);
         box(next_btn_room, 0, 0);
         box(submit_btn_room, 0, 0);
@@ -265,7 +259,6 @@ WINDOW *get_target_win_room()
     int tcbbx = getbegx(top_create_btn_room), tcbby = getbegy(top_create_btn_room), tcbbw = getmaxx(top_create_btn_room), tcbbh = getmaxy(top_create_btn_room);
     int tsbbx = getbegx(top_search_btn_room), tsbby = getbegy(top_search_btn_room), tsbbw = getmaxx(top_search_btn_room), tsbbh = getmaxy(top_search_btn_room);
     int inbx = getbegx(input_string_room), inby = getbegy(input_string_room), inbw = getmaxx(input_string_room), inbh = getmaxy(input_string_room);
-    // int pibx = getbegx(password_input), piby = getbegy(password_input), pibw = getmaxx(password_input), pibh = getmaxy(password_input);
     int cbbx = getbegx(submit_btn_room), cbby = getbegy(submit_btn_room), cbbw = getmaxx(submit_btn_room), cbbh = getmaxy(submit_btn_room);
     int cbbx2 = getbegx(cancel_btn_room), cbby2 = getbegy(cancel_btn_room), cbbw2 = getmaxx(cancel_btn_room), cbbh2 = getmaxy(cancel_btn_room);
     int lbbx = getbegx(logout_btn_room), lbby = getbegy(logout_btn_room), lbbw = getmaxx(logout_btn_room), lbbh = getmaxy(logout_btn_room);
@@ -319,7 +312,7 @@ void del_room()
     delwin(top_create_btn_room);
     delwin(top_search_btn_room);
     delwin(top_win_room);
-    // delwin(main_win_room);
+
     refresh();
     // endwin();
 }
@@ -404,15 +397,9 @@ void listen_mouse_event_room(void)
             }
             else if (target == logout_btn_room)
             {
-                // del_room();
                 napms(150);
-                // splashscreen();
-                // init_login();
-                // listen_mouse_event_login();
-                // napms(150);
                 del_room();
                 break;
-                // init_room(username);
             }
             else if (target == pre_btn_room)
             {

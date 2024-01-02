@@ -12,6 +12,7 @@ WINDOW *submit_btn_win;
 WINDOW *cancel_btn_win;
 extern char username[100];
 extern char password[100];
+extern bool is_login;
 char activation_code[100];
 void initActiveUI()
 {
@@ -121,10 +122,10 @@ void destroy_active()
     delwin(cancel_btn_win);
     delwin(active_win);
     delwin(content_win);
-    // delwin(active_win);
     clear();
     touchwin(active_win);
     wrefresh(active_win);
+    init_login();
 }
 WINDOW *get_target_win_active(MEVENT mouse)
 {
@@ -258,7 +259,9 @@ void activeUI()
         if (target_win == cancel_btn_win)
         {
             /* code */
+            // is_login = true;
             destroy_active();
+            // init_login();
             break;
         }
     }

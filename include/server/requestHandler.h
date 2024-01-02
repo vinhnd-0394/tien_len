@@ -42,7 +42,7 @@ void loginHandler(int sockfd, Req req)
     }
 
     asyncErrCount(user);
-    if (user->errCount >= 3)
+    if (user->status == blocked)
     {
         res = createRResponse(false, "User was blocked");
         goto done;
