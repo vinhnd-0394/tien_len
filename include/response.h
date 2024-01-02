@@ -165,10 +165,7 @@ int sendResponse(int sockfd, Res res)
     {
         UpdateRoomResD updateRoom = res.data.updateRoom;
         printf("Server send UPDATE_ROOM_RES: %s\n", getSessionBySockfd(sockfd)->username);
-        // for (int i = 0; i < updateRoom.playerSize; i++)
-        // {
-        //     /* code */
-        // }
+
         break;
     }
     case R_RES:

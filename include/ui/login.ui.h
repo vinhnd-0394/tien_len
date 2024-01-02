@@ -322,6 +322,7 @@ void listen_mouse_event_login(void)
             {
                 del_login();
                 activeUI();
+                is_login = true;
                 init_login();
             }
             else if (target == cancel_btn_login)
