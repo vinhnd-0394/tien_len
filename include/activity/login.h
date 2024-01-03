@@ -54,4 +54,31 @@ bool processLogin(char *username, char *password, char message[100])
     strcpy(message, res.data.resR.message);
     return isSuccess;
 }
+void logout(Session session) {
+    Req req = createLogoutRequest();
+    char message[200];
+    int bytes = sendRequest(clientfd, req);
+    if (bytes < 0)
+    {
+        strcpy(message, "Error sending request");
+        return false;
+    }
+    if (bytes == 0)
+    {
+        strcpy(message, "Logout request");
+        return false;
+    }
+    Res res;
+    bytes = recvResponse(clientfd, &res);
+    if (bytes < 0)
+    {
+        strcpy(message, "Error receiving response");
+        return false;
+    }
+    if (bytes == 0)
+    {
+        strcpy(message, "Logout successfully");
+        return false;
+    }
+}
 #endif // ACTIVITY_LOGIN_H_

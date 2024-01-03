@@ -115,6 +115,11 @@ int connectHandler(int sockfd)
         signupHandler(sockfd, req); // Đã test ok
         /* code */
         break;
+    case LOGOUT_REQ:
+        printf("Logout request\n");
+        logoutHandler(sockfd, req); // Đã test ok
+        /* code */
+        break;
     case ACTIVE_REQ:
         printf("Active request\n");
         activeHandler(sockfd, req); // Đã test ok

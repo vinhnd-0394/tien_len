@@ -10,7 +10,7 @@ typedef enum _reqType
     LOGIN_REQ,  // Login request from client
     SIGNUP_REQ, // Signup request from client
     ACTIVE_REQ, // Active request from client
-    // LOGOUT_REQ,
+    LOGOUT_REQ, // Logout request from client
     PLAY_REQ,        // Play request from client
     SKIP_REQ,        // Skip request from client
     START_GAME_REQ,  // Start game request from client
@@ -27,6 +27,9 @@ typedef struct _login
     char password[20];
 } LoginReqD;
 typedef struct _login SignupReqD;
+typedef struct _logout
+{
+} LogoutReqD;
 typedef struct _active
 {
     LoginReqD userData;
@@ -73,6 +76,7 @@ typedef union requestData
     LoginReqD login;           //
     SignupReqD signup;         //
     ActiveReqD active;         //
+    LogoutReqD logout;         //
     PlayReqD play;             //
     SkipGameReqD skip;         //
     StartGameReqD startGame;   //
@@ -103,6 +107,11 @@ Req createLoginRequest(char *username, char *password)
     strcpy(data.username, username);
     strcpy(data.password, password);
     return createRequest(LOGIN_REQ, (ReqD)data);
+}
+
+Req createLogoutRequest() {
+    LogoutReqD data;
+    return createRequest(LOGOUT_REQ, (ReqD)data);
 }
 
 Req createSignupRequest(const char *username, const char *password)

@@ -67,6 +67,13 @@ done:
     exportList(userList, "users.txt");
     freeUserList(userList);
 }
+void logoutHandler(int sockfd, Req req) {
+    Res res;
+    res = createRResponse(true, "Logout successfully");
+    sendResponse(sockfd, res);
+    closeSession(getSessionBySockfd(sockfd));
+    
+}
 void signupHandler(int sockfd, Req req)
 {
     Dllist userList = makeUsersList("users.txt");

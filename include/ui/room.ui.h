@@ -398,6 +398,7 @@ void listen_mouse_event_room(void)
             else if (target == logout_btn_room)
             {
                 napms(150);
+                logout(getSessionByUser(username));
                 del_room();
                 break;
             }
