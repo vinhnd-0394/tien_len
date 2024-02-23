@@ -3,4 +3,4 @@
 src/server/*.o
 src/client/*.o
 
-include
+/include/
