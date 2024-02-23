@@ -14,6 +14,7 @@ typedef struct _Room
     int lastTurn;
 } *Room;
 static Dllist rooms = NULL;
+Player findPlayerByName(Room room, const char* name);
 Room newRoom(char *name, int maxUser);
 void addRoom(Room room);
 void freeRoom(Room room);
@@ -131,6 +132,19 @@ Room findRoomByName(char *name)
     }
     return NULL;
 }
+
+Player findPlayerByName(Room roomname, char *name)
+{
+    if (!rooms)
+    {
+        return NULL;
+    }
+    for (int i =0 ; i < roomname->players.size(); i++){
+        if(strcmp(name,roomname->players[i].name) == 0) return roomname->players[i];
+    }
+    return NULL;
+}
+
 int findRoomsByNamePrefix(char *prefix, Room result[100])
 {
     if (!rooms)

@@ -145,7 +145,7 @@ void clearScr(WINDOW *org)
 }
 void print_list_room()
 {
-    mvwprintw(input_win_room, 9, 12, "%-5s %-15s %-15s %-8s %-10s", "ID", "Name", "Owner", "Player", "Status");
+    mvwprintw(input_win_room, 9, 12, "%-5s %-15s %-15s %-8s %-10s %-20s", "ID", "Name", "Owner", "Player", "Status", "Owner Score");
 
     char str[10] = "    ";
     for (int i = 10 * (current_page_room - 1); i < current_page_room * 10; i++)
@@ -155,11 +155,12 @@ void print_list_room()
             str[0] = room_list[i].currentPlayer + '0';
             str[1] = '/';
             str[2] = room_list[i].maxPlayer + '0';
-            mvwprintw(input_win_room, 11 + i - 10 * (current_page_room - 1), 12, "%-5d %-15s %-15s %-8s %-10s", room_list[i].id, room_list[i].roomName, room_list[i].owner, str, room_list[i].status ? "Playing" : "Waiting");
+            Player owner_room = findPlayerByName(room_list[i],room_list[i].owner);
+            mvwprintw(input_win_room, 11 + i - 10 * (current_page_room - 1), 12, "%-5d %-15s %-15s %-8s %-10s %-20%", room_list[i].id, room_list[i].roomName, room_list[i].owner, str, room_list[i].status,owner.point ? "Playing" : "Waiting");
         }
         else
         {
-            mvwprintw(input_win_room, 11 + i - 10 * (current_page_room - 1), 12, "%-5d %-15s %-15s %-8s %-10s", i + 1, "----------", "----------", "--/--", "----------");
+            mvwprintw(input_win_room, 11 + i - 10 * (current_page_room - 1), 12, "%-5d %-15s %-15s %-8s %-10s %-20%", i + 1, "----------", "----------", "--/--", "----------", "----------");
         }
     }
     wrefresh(input_win_room);

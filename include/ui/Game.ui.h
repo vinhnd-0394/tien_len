@@ -52,28 +52,7 @@ static WINDOW *sendBtn = NULL;
 static MEVENT mouseEvent = {0};
 //
 bool isFocused = true;
-// mock
-void mock()
-{
-    // currentRoom.isPlaying = true;
-    // for (int i = 0; i < 13; i++)
-    // {
-    //     currentRoom.cardsInHand[i] = createCard(HEART, THREE);
-    // }
-    // currentRoom.currentPlayer = 4;
-    // currentRoom.cardsOnTableSize = 5;
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     currentRoom.cardsOnTable[i] = createCard(CLUB, FOUR);
-    // }
 
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     strcpy(currentRoom.players[i].name, "son");
-    //     currentRoom.players[i].cardSize = 13 - i;
-    // }
-}
-//
 static int cardInHandSize = 0;
 void init_game(char *, char *);
 static void render();
@@ -316,8 +295,6 @@ void render_ok_btn()
     okBtn = derwin(gameWin, 3, 12, getmaxy(gameWin) - 5, getmaxx(gameWin) / 2 - 10);
     wbkgd(okBtn, COLOR_PAIR(4));
     wattron(okBtn, A_BOLD);
-    // mvwprintw(okBtn, 1, 3, currentRoom.isPlaying ? "PLAY" : currentRoom.owner ? "START"
-    //                                                                           : "WAITTING");
     if (currentRoom.isPlaying)
     {
         mvwprintw(okBtn, 1, 4, "PLAY");
@@ -401,8 +378,6 @@ void render_chat_mess()
             wattroff(chatWin, A_BOLD | COLOR_PAIR(10));
             continue;
         }
-        // is other
-        // wattron(chatWin, A_BOLD | COLOR_PAIR(2));
         mvwprintw(chatWin, maxY - i - 7, 4, "%s: %-58s", chat.username, chat.message);
         // wattroff(chatWin, A_BOLD | COLOR_PAIR(2));
     }
