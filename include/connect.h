@@ -5,19 +5,6 @@
 int parentfd = -1; /* parent socket */
 int clientfd = -1; /* child socket */
 
-
-/// @brief Create a new socket for server
-/// @param PORT int
-/// @return  a file descriptor for the new socket, or -1 for errors.
-int initConnectionServer(const int PORT);
-/// @brief Create a new socket for client
-/// @param HOST const char *
-/// @param PORT int
-/// @return  a file descriptor for the new socket, or -1 for errors.
-int initConnectionClient(const char *HOST, const int PORT);
-
-/// @brief Close a connection
-/// @param fd file descriptor
 void closeConnection(int fd);
 
 int initConnectionServer(const int PORT)
